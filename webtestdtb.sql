@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 27, 2020 at 03:03 PM
+-- Generation Time: Nov 28, 2020 at 10:13 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.12
 
@@ -75,6 +75,20 @@ CREATE TABLE IF NOT EXISTS `news` (
 INSERT INTO `news` (`id`, `new_id`, `img`, `header_title`, `header_content`, `footer_title`, `footer_content`) VALUES
 (5, 1, 'img test 1', 'Tôi Đã Biến Website Thành Ứng Dụng Di Động Như Thế Nào?', 'Trong một dự án, khi gặp yêu cầu phải làm gấp một ứng dụng di động,', 'Tạm kết', 'Như tôi đã viết ở mục 1,'),
 (6, 2, 'lap-trinh-game-dua-xe-voi-pygame-63741703749.7302.jpg', 'Lập Trình Game Đua Xe Với Pygame', 'Chào mọi người! Trong bài hướng dẫn này', 'Kết', 'Vậy là chúng ta đã hoàn thành xong game đua xe đơn giản rồi.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
