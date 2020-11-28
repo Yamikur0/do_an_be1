@@ -1,0 +1,13 @@
+<?php
+foreach ($newList as $item) {
+?>
+    <tr>
+        <td><img src="/<?php echo BASE_URL ?>/public/img/<?php echo $item['img'] ?>" style="max-width: 120px;"></td>
+        <td><?php echo $item['header_title'] ?></td>
+        <td><?php echo $item['header_content'] ?></td>
+        <td><?php echo $item['footer_title'] ?></td>
+        <td><?php echo $item['footer_content'] ?></td>
+    </tr>
+<?php
+}
+?>

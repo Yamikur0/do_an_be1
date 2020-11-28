@@ -1,0 +1,31 @@
+body{
+    background-color: #f1f1f1;
+}
+
+.main-content{
+    background-color: #fff;
+}
+
+.main-image{
+    text-align: center;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+.main-content .blog-content h1{
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.main-content .blog-content .content img{
+    max-width: 100%;
+    height: auto;
+}
+
+.main-content .blog-content{
+    color: #333;
+    padding: 0 15px;
+}
