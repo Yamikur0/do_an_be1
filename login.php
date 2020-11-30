@@ -57,7 +57,7 @@ span.psw {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  /* display: none; Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -95,7 +95,7 @@ span.psw {
 }
 
 /* Add Zoom Animation */
-.animate {
+/* .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
 }
@@ -108,10 +108,10 @@ span.psw {
 @keyframes animatezoom {
   from {transform: scale(0)} 
   to {transform: scale(1)}
-}
+} */
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+/* @media screen and (max-width: 300px) {
   span.psw {
      display: block;
      float: none;
@@ -119,7 +119,7 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
-}
+} */
 </style>
 </head>
 <body>
