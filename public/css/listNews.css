@@ -1,0 +1,12 @@
+body{
+    background-color: #f1f1f1;
+}
+.list-items {
+    background-color: #fff;
+}
+
+.list-items .item{
+    margin-bottom: 30px;
+    padding: 15px 44px 15px 13px;
+    border-radius: 3px;
+}
