@@ -20,14 +20,28 @@ $new = $newModel->getNewsById($id);
     <link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
     <link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/prism.css">
     <style>
-		.bg-white {
-			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
-		}
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: all 300ms;
+            margin-bottom: 50px;
+            z-index: 9;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 0 15px;
+            box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
+            border: none;
+            border-radius: 0;
+            margin: 0;
+        }
 
-		.navbar {
-			margin-bottom: 50px;
-		}
-	</style>
+        .main-content{
+            margin-top: 100px;
+        }
+    </style>
 </head>
 
 <body>

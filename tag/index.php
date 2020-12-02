@@ -4,18 +4,23 @@ require_once '../config/config.php';
 require_once '../component/Navbar.php';
 require_once '../component/Pagination.php';
 require_once '../component/Tag.php';
+
 spl_autoload_register(function ($class_name) {
 	require '../app/models/' . $class_name . '.php';
 });
 
 $perPage = 6;
 $page = 1;
+$tag = '';
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 }
+if (isset($_GET['tag'])) {
+	$tag = $_GET['tag'];
+}
 
 $newModel = new NewsModel();
-$newList = $newModel->getNewsByPage($page, $perPage);
+$newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,7 +111,7 @@ $newList = $newModel->getNewsByPage($page, $perPage);
 						<div class="col-md-8">
 							<h3 class="header-title"><a href="/<?php echo BASE_URL ?>/post/?id=<?php echo $value['id'] ?>"><?php echo $value['header_title'] ?></a></h3>
 							<p class="description"><?php echo $value['description'] ?></p>
-							<?php echo Tag::createTag($value['id'])?>
+							<?php echo Tag::createTag($value['new_id'])?>
 							<div class="create-at"><?php echo $value['create_at'] ?></div>
 						</div>
 					</div>
@@ -116,7 +121,7 @@ $newList = $newModel->getNewsByPage($page, $perPage);
 	</div>
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<?php echo Pagination::createPageLinks($newModel->getTotalRow(), $perPage, $page); ?>
+			<?php echo Pagination::createPageLinks(count($newList), $perPage, $page); ?>
 		</ul>
 	</nav>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
