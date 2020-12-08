@@ -48,12 +48,45 @@ $userModel = new UserModel();
             color: #5cb85c;
         }
 
-        .form-control {
-            height: 40px;
+        #loginbox .panel {
+            border: none;
         }
 
-        .input-group {
-            opacity: .45;
+        #loginbox .panel .panel-heading {
+            background: none;
+            border: none;
+            color: #428bca;
+        }
+
+        #loginbox .panel .panel-heading a {
+            color: #5cb85c;
+        }
+
+        #signupbox .panel {
+            border: none;
+        }
+
+        #signupbox .panel .panel-heading {
+            background: none;
+            border: none;
+            color: #428bca;
+        }
+
+        #signupbox .panel .panel-heading a {
+            color: #5cb85c;
+        }
+
+        #btn-signup {
+            margin-top: 20px;
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+
+        #btn-signup:hover {
+            color: #fff;
+            background-color: #47a447;
+            border-color: #398439;
         }
     </style>
 </head>
@@ -65,7 +98,7 @@ $userModel = new UserModel();
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
+                    <div class="panel-title">SIGN IN</div>
                     <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                 </div>
 
@@ -122,7 +155,7 @@ $userModel = new UserModel();
         <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Sign Up</div>
+                    <div class="panel-title">SIGN UP</div>
                     <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                 </div>
                 <div class="panel-body">
