@@ -31,6 +31,7 @@ $newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 	<title>Document</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/listNews.css">
+	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
 	<style>
 		.bg-white {
 			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
@@ -46,53 +47,10 @@ $newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 			margin: 15px 0 18px 0;
 		}
 
-		.navbar {
-			margin-bottom: 50px;
-		}
-
 		.description {
 			color: #898989;
 			font-size: 16px;
 			line-height: 22px;
-		}
-
-		.tag-list span a {
-			padding: 5px 12px;
-			font-size: 12px;
-			line-height: 14px;
-			display: block;
-			color: #898989;
-			text-decoration: none;
-			background-color: transparent;
-		}
-
-		.tag-list span a:hover {
-			text-decoration: underline;
-		}
-
-		.tag-list span:hover {
-			background: #3b3c54;
-			border-color: #3b3c54;
-			color: #fff;
-		}
-
-		.tag-list span {
-			display: inline-block;
-			margin-bottom: 5px;
-			margin-right: 5px;
-			border: 1px solid #dcdcdc;
-			border-radius: 3px;
-			background: #f5f5f5;
-			transition: all 300ms;
-		}
-
-		.tag-list .tag-scroll {
-			white-space: nowrap;
-			margin-bottom: 3px;
-			overflow-x: hidden;
-			overflow-y: hidden;
-			padding-left: 0;
-			margin-left: 15px;
 		}
 	</style>
 </head>
@@ -100,7 +58,7 @@ $newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 <body>
 	<?php echo Navbar::createNavbar() ?>
 
-	<div class="container">
+	<div class="container test">
 		<?php foreach ($newList as $value) { ?>
 			<div class="list-items">
 				<div class="item">
@@ -111,7 +69,7 @@ $newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 						<div class="col-md-8">
 							<h3 class="header-title"><a href="/<?php echo BASE_URL ?>/post/?id=<?php echo $value['id'] ?>"><?php echo $value['header_title'] ?></a></h3>
 							<p class="description"><?php echo $value['description'] ?></p>
-							<?php echo Tag::createTag($value['new_id'])?>
+							<?php echo Tag::createTag($value['new_id']) ?>
 							<div class="create-at"><?php echo $value['create_at'] ?></div>
 						</div>
 					</div>
@@ -121,12 +79,15 @@ $newList = $newModel->getNewsByTagPage($tag, $page, $perPage);
 	</div>
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<?php echo Pagination::createPageLinks(count($newList), $perPage, $page); ?>
+			<?php
+			$link = '/' . BASE_URL . '/tag/?tag=' . $tag . '&';
+			echo Pagination::createPageLinks($newModel->getTotalRowByTag($tag), $perPage, $page, $link); ?>
 		</ul>
 	</nav>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
 </body>
 
 </html>

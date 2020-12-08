@@ -2,15 +2,17 @@
 require_once '../config/database.php';
 require_once '../config/config.php';
 require_once '../component/Navbar.php';
+require_once '../component/Pagination.php';
 require_once '../component/Tag.php';
 
 spl_autoload_register(function ($class_name) {
     require '../app/models/' . $class_name . '.php';
 });
-$newModel = new NewsModel();
 
-$id = isset($_GET['id']) ? $_GET['id'] : 7;
-$new = $newModel->getNewsById($id);
+$newModel = new NewsModel();
+$newModel->getTagById(10);
+// $newModel->createComment("nguyen tien",10,1);
+// var_dump();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,45 +21,19 @@ $new = $newModel->getNewsById($id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
-    <link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/prism.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="../public/css/comment.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <?php echo Navbar::createNavbar() ?>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row main-content">
-                    <div class="col-md-12">
-                        <div class="main-image">
-                            <img src="/<?php echo BASE_URL ?>/public/img/<?php echo $new['img'] ?>" alt="test" class="img-fluid">
-                        </div>
-                        <div class="blog-content">
-                            <h1><?php echo $new['header_title'] ?></h1>
-                            <div class="content">
-                                <?php echo $new['content'] ?>
-                                <?php echo Tag::createTag($new['id']) ?>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
     <div class="content-item" id="comments" style="margin-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
                     <form action="index.php" method="post">
                         <h3 class="pull-left">New Comment</h3>
-                        <button type="submit" class="btn btn-normal pull-right" name="submmit" onclick="<?php if(isset($_POST['message'])){$newModel->createComment($_POST['message'],$id,1);header('location:./');}?>">Submit</button>
+                        <button type="submit" class="btn btn-normal pull-right" name="submmit" onclick="<?php if(isset($_POST['message'])){$newModel->createComment($_POST['message'],31,1);header('location:./');}?>">Submit</button>
                         <fieldset>
                             <div class="row">
                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
@@ -154,11 +130,9 @@ $new = $newModel->getNewsById($id);
             </div>
         </div>
     </div>
-    <script src="/<?php echo BASE_URL ?>/public/js/prism.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

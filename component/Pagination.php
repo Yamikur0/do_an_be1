@@ -7,13 +7,13 @@ spl_autoload_register(function ($class_name) {
 
 class Pagination
 {
-    public static function createPageLinks(int $totalRow, int $perPage, int $page)
+    public static function createPageLinks(int $totalRow, int $perPage, int $page,string $link)
     {
         $preDisabled = $page == 1 ? 'disabled' : '';
         $nextDisabled = $page > ($totalRow / $perPage) ? 'disabled' : '';
         #pre
         $output = '<li class="page-item ' . $preDisabled . '">
-            <a class="page-link" href="/' . BASE_URL . '/home/?page=' . ($page - 1) . '" aria-label="Previous">
+            <a class="page-link" href="' . $link . 'page=' . ($page - 1) . '" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
             </a>
@@ -21,14 +21,14 @@ class Pagination
         #page
         for ($i = 1; $i < ($totalRow / $perPage) + 1; $i++) {
             if ($i == $page) {
-                $output .= ' <li class="page-item active"><a class="page-link" href="/' . BASE_URL . '/home/?page=' . ($i) . '">' . $i . '</a></li>';
+                $output .= ' <li class="page-item active"><a class="page-link" href="' . $link . 'page=' . ($i) . '">' . $i . '</a></li>';
             } else {
-                $output .= ' <li class="page-item"><a class="page-link" href="/' . BASE_URL . '/home/?page=' . ($i) . '">' . $i . '</a></li>';
+                $output .= ' <li class="page-item"><a class="page-link" href="' . $link . 'page=' . ($i) . '">' . $i . '</a></li>';
             }
         }
         #next
         $output .= '<li class="page-item ' . $nextDisabled . '">
-            <a class="page-link" href="/' . BASE_URL . '/home/?page=' . ($page + 1) . '" aria-label="Next">
+            <a class="page-link" href="' . $link . 'page=' . ($page + 1) . '" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
             </a>

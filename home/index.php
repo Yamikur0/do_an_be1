@@ -26,6 +26,7 @@ $newList = $newModel->getNewsByPage($page, $perPage);
 	<title>Document</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/listNews.css">
+	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
 	<style>
 		.bg-white {
 			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
@@ -50,53 +51,15 @@ $newList = $newModel->getNewsByPage($page, $perPage);
 			font-size: 16px;
 			line-height: 22px;
 		}
-
-		.tag-list span a {
-			padding: 5px 12px;
-			font-size: 12px;
-			line-height: 14px;
-			display: block;
-			color: #898989;
-			text-decoration: none;
-			background-color: transparent;
-		}
-
-		.tag-list span a:hover {
-			text-decoration: underline;
-		}
-
-		.tag-list span:hover {
-			background: #3b3c54;
-			border-color: #3b3c54;
-			color: #fff;
-		}
-
-		.tag-list span {
-			display: inline-block;
-			margin-bottom: 5px;
-			margin-right: 5px;
-			border: 1px solid #dcdcdc;
-			border-radius: 3px;
-			background: #f5f5f5;
-			transition: all 300ms;
-		}
-
-		.tag-list .tag-scroll {
-			white-space: nowrap;
-			margin-bottom: 3px;
-			overflow-x: hidden;
-			overflow-y: hidden;
-			padding-left: 0;
-			margin-left: 15px;
-		}
 	</style>
 </head>
 
 <body>
 	<?php echo Navbar::createNavbar() ?>
 
-	<div class="container">
-		<?php foreach ($newList as $value) { ?>
+	<div class="container test">
+		<?php foreach ($newList as $value) { ;?>
+			
 			<div class="list-items">
 				<div class="item">
 					<div class="row">
@@ -116,7 +79,9 @@ $newList = $newModel->getNewsByPage($page, $perPage);
 	</div>
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<?php echo Pagination::createPageLinks($newModel->getTotalRow(), $perPage, $page); ?>
+			<?php 
+			$link = '/'.BASE_URL.'/home/?';
+			echo Pagination::createPageLinks($newModel->getTotalRow(), $perPage, $page,$link); ?>
 		</ul>
 	</nav>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

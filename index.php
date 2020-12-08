@@ -4,8 +4,7 @@ require_once './config/config.php';
 spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
-$newModel = new NewsModel();
-$newList = $newModel->getNews();
+$userModel = new UserModel();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +13,17 @@ $newList = $newModel->getNews();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style>
+        .panel-info {
+            border-color: transparent;
+        }
+
+        .panel-info>.panel-heading {
+            border-color: transparent;
+            background-color: transparent;
+        }
+
         body {
             background-image: url("/<?php echo BASE_URL ?>/public/img/b2.jpg");
             background-repeat: no-repeat;
@@ -32,14 +41,21 @@ $newList = $newModel->getNews();
         }
 
         .form-group .control a {
-            color: #fff;
+            color: #5cb85c;
         }
 
         .form-group .control a:hover {
             color: #5cb85c;
         }
+
+        .form-control {
+            height: 40px;
+        }
+
+        .input-group {
+            opacity: .45;
+        }
     </style>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 
 <body>
@@ -110,7 +126,7 @@ $newList = $newModel->getNews();
                     <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal" role="form">
+                    <form id="signupform" class="form-horizontal" role="form" action="./" method="POST">
 
                         <div id="signupalert" style="display:none" class="alert alert-danger">
                             <p>Error:</p>
@@ -118,29 +134,29 @@ $newList = $newModel->getNews();
                         </div>
 
                         <div class="form-group">
-                            <label for="username" class="col-md-3 control-label">Username</label>
+                            <label for="username-signup" class="col-md-3 control-label">Username</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                                <input type="text" class="form-control" name="username-signup" id="username-signup" placeholder="Username">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-md-3 control-label">Email</label>
+                            <label for="passwd-signup" class="col-md-3 control-label">Password</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Email Address">
+                                <input type="text" class="form-control" name="passwd-signup" id="passwd-signup" placeholder="Password">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="passwd" class="col-md-3 control-label">Password</label>
+                            <label for="passwd-confirm" class="col-md-3 control-label">Confirm</label>
                             <div class="col-md-9">
-                                <input type="password" class="form-control" name="passwd" id="passwd" placeholder="Password">
+                                <input type="password" class="form-control" name="passwd-confirm-signup" id="passwd-confirm" placeholder="Confirm">
                             </div>
                         </div>
                         <div class="form-group">
                             <!-- Button -->
                             <div class="col-sm-12">
-                                <button id="btn-signup" type="button" class="btn btn-info">Sign Up</button>
+                                <button id="btn-signup" type="submit" class="btn btn-info">Sign Up</button>
                             </div>
                         </div>
                     </form>
@@ -148,8 +164,22 @@ $newList = $newModel->getNews();
             </div>
         </div>
     </div>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+        $("#signupform").submit(function() {
+            let a = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            // alert(<?php //if(isset($_POST['username-signup'])){echo $userModel->checkUsername($_POST['username-signup'])?'false':'true';}?>);
+            if (<?php if(isset($_POST['username-signup'])){echo $userModel->checkUsername($_POST['username-signup'])?'false':'true';}?>) {
+                alert('test');
+            }else{
+                alert('test2')
+            }
+        });
+        
+    </script>
+  
+    <!-- <script src="public/js/login.js"></script> -->
 </body>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </html>

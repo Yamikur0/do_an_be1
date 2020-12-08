@@ -1,9 +1,4 @@
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+$("#signupform").submit(function(){
+    let a = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    alert($("#username-signup").value);
+});
