@@ -13,9 +13,12 @@ $page = 1;
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 }
-
+session_start();
 $newModel = new NewsModel();
 $newList = $newModel->getNewsByPage($page, $perPage);
+if (!isset($_SESSION['username'])) {
+	header('location: http://localhost:81/do_an_be1/index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

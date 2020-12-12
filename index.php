@@ -5,6 +5,12 @@ spl_autoload_register(function ($class_name) {
     require './app/models/' . $class_name . '.php';
 });
 $userModel = new UserModel();
+if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->checkUsername($_POST['username'], $_POST['password'])) {
+    session_start();
+    $_SESSION['username'] = $_POST['username'];
+    header('location: http://localhost:81/do_an_be1/home/index.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,14 +109,11 @@ $userModel = new UserModel();
                 </div>
 
                 <div style="padding-top:30px" class="panel-body">
-
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
-                    <form id="loginform" class="form-horizontal" role="form">
-
+                    <form action="index.php" method="POST" id="loginform" class="form-horizontal" role="form">
                         <label style="margin-bottom: 25px" class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+                            <input id="login-username" type="text" class="form-control" name="username" placeholder="username or email">
                         </label>
 
                         <label style="margin-bottom: 25px" class="input-group">
@@ -130,12 +133,10 @@ $userModel = new UserModel();
                             <!-- Button -->
 
                             <div class="col-sm-12 controls">
-                                <a id="btn-login" href="#" class="btn btn-success">Login </a>
+                                <button id="btn-login" class="btn btn-success" type="submit">Login </button>
 
                             </div>
                         </div>
-
-
                         <div class="form-group">
                             <div class="col-md-12 control">
                                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%; color: #fff">
@@ -147,7 +148,6 @@ $userModel = new UserModel();
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -160,10 +160,10 @@ $userModel = new UserModel();
                 </div>
                 <div class="panel-body">
                     <form id="signupform" class="form-horizontal" role="form" action="./" method="POST">
-
-                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                        <!-- style="display:none" -->
+                        <div id="signupalert" style="display: none;" class="alert alert-danger">
                             <p>Error:</p>
-                            <span></span>
+                            <span>test</span>
                         </div>
 
                         <div class="form-group">
@@ -199,20 +199,12 @@ $userModel = new UserModel();
     </div>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>
-        $("#signupform").submit(function() {
-            let a = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            // alert(<?php //if(isset($_POST['username-signup'])){echo $userModel->checkUsername($_POST['username-signup'])?'false':'true';}?>);
-            if (<?php if(isset($_POST['username-signup'])){echo $userModel->checkUsername($_POST['username-signup'])?'false':'true';}?>) {
-                alert('test');
-            }else{
-                alert('test2')
-            }
-        });
-        
-    </script>
-  
     <!-- <script src="public/js/login.js"></script> -->
+    <?php
+    if (isset($_POST['login']) && $_POST['login'] == 'Sign up') {
+        echo '<script>$("#loginbox").hide(); $("#signupbox").show()</script>';
+    }
+    ?>
 </body>
 
 </html>
