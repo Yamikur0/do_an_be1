@@ -1,15 +1,17 @@
 <?php
-require_once './config/database.php';
-require_once './config/config.php';
+require_once '../config/database.php';
+require_once '../config/config.php';
 spl_autoload_register(function ($class_name) {
-    require './app/models/' . $class_name . '.php';
+    require '../app/models/' . $class_name . '.php';
 });
 $userModel = new UserModel();
-if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->checkUsername($_POST['username'], $_POST['password'])) {
+if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->checkUser($_POST['username'], $_POST['password'])) {
     session_start();
     $_SESSION['username'] = $_POST['username'];
     header('location: http://localhost:81/do_an_be1/home/index.php');
 }
+$displaynone = 'display: none;';
+$submit = false;
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +22,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->che
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
         .panel-info {
             border-color: transparent;
@@ -159,11 +162,10 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->che
                     <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal" role="form" action="./" method="POST">
+                    <form id="signupform" class="form-horizontal" role="form" action="./" method="POST" onsubmit="return <?php echo $submit ? 'true' : 'false'; ?>">
                         <!-- style="display:none" -->
-                        <div id="signupalert" style="display: none;" class="alert alert-danger">
-                            <p>Error:</p>
-                            <span>test</span>
+                        <div id="signupalert" style="<?php echo $displaynone; ?>" class="alert alert-danger">
+                            <span></span>
                         </div>
 
                         <div class="form-group">
@@ -176,7 +178,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->che
                         <div class="form-group">
                             <label for="passwd-signup" class="col-md-3 control-label">Password</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="passwd-signup" id="passwd-signup" placeholder="Password">
+                                <input type="password" class="form-control" name="passwd-signup" id="passwd-signup" placeholder="Password">
                             </div>
                         </div>
 
@@ -198,8 +200,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->che
         </div>
     </div>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!-- <script src="public/js/login.js"></script> -->
+    <script src="../public/js/login.js"></script>
     <?php
     if (isset($_POST['login']) && $_POST['login'] == 'Sign up') {
         echo '<script>$("#loginbox").hide(); $("#signupbox").show()</script>';
