@@ -60,10 +60,17 @@ class NewsModel extends Db
     //add comment
     public function createComment($message, $newsId, $userId)
     {
-        $date = date('Y-m-d');
-        $sql = parent::$connection->prepare("INSERT INTO `comments`(`description`, `create_at`, `news_id`, `user_id`) VALUES (?,?,?,?)");
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $date = date('Y-m-d H:i:s');
+        $sql = parent::$connection->prepare("INSERT INTO `comments` ( `description`, `create_at`, `news_id`, `user_id`) VALUES ( ?, ?, ?, ?)");
         $sql->bind_param('ssii', $message, $date, $newsId, $userId);
         return $sql->execute();
+    }
+    public function getAllComment($id)
+    {
+        $sql = parent::$connection->prepare("SELECT comments.id,comments.description,comments.create_at,comments.like,users.name FROM comments JOIN users ON users.id = comments.user_id WHERE comments.news_id = ? ORDER BY comments.create_at DESC");
+        $sql->bind_param('i',$id);
+        return parent::select($sql);
     }
     public function likeComment($commentId, $userId)
     {
@@ -90,5 +97,11 @@ class NewsModel extends Db
         $sql3->bind_param('ii', $commentId, $userId);
         $sql3->execute();
         return $sql->execute();
+    }
+    public function getLike($commentId)
+    {
+        $sql = parent::$connection->prepare("SELECT `like` FROM `comments` WHERE comments.id = ?");
+        $sql->bind_param('i', $commentId);
+        return parent::select($sql)[0]['like'];
     }
 }

@@ -4,15 +4,16 @@ require_once '../config/config.php';
 spl_autoload_register(function ($class_name) {
     require '../app/models/' . $class_name . '.php';
 });
-$userModel = new UserModel();
-if (!empty($_POST['username']) && !empty($_POST['password']) && !$userModel->checkUser($_POST['username'], $_POST['password'])) {
-    session_start();
-    $_SESSION['username'] = $_POST['username'];
-    header('location: http://localhost:81/do_an_be1/home/index.php');
+session_start();
+if (isset($_POST['logout'])) {
+    session_destroy();
 }
-$displaynone = 'display: none;';
-$submit = false;
-
+$userModel = new UserModel();
+if (!empty($_POST['username']) && !empty($_POST['password']) && $userModel->checkUser($_POST['username'], $_POST['password'])) {
+    $_SESSION['userId'] = $userModel->getUserId($_POST['username']);
+    $_SESSION['username'] = $_POST['username'];
+    header('location: http://localhost:81/do_an_be1/home/');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,9 +163,9 @@ $submit = false;
                     <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal" role="form" action="./" method="POST" onsubmit="return <?php echo $submit ? 'true' : 'false'; ?>">
+                    <form id="signupform" class="form-horizontal" role="form" action="./" method="POST">
                         <!-- style="display:none" -->
-                        <div id="signupalert" style="<?php echo $displaynone; ?>" class="alert alert-danger">
+                        <div id="signupalert" style="display: none;" class="alert alert-danger">
                             <span></span>
                         </div>
 
@@ -202,7 +203,7 @@ $submit = false;
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="../public/js/login.js"></script>
     <?php
-    if (isset($_POST['login']) && $_POST['login'] == 'Sign up') {
+    if (isset($_POST['signup']) && $_POST['signup'] == 'Sign up') {
         echo '<script>$("#loginbox").hide(); $("#signupbox").show()</script>';
     }
     ?>

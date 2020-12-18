@@ -4,6 +4,7 @@ spl_autoload_register(function ($class_name) {
     require '../app/models/' . $class_name . '.php';
 });
 $usermodel = new UserModel();
+$result = '';
 if (isset($_POST['username_check'])) {
     $username = $_POST['username'];
     if (!$usermodel->checkUsername($username)) {
@@ -24,3 +25,4 @@ if (isset($_POST['save'])) {
         exit();
     }
 }
+?>

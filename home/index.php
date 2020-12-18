@@ -17,7 +17,7 @@ session_start();
 $newModel = new NewsModel();
 $newList = $newModel->getNewsByPage($page, $perPage);
 if (!isset($_SESSION['username'])) {
-	header('location: http://localhost:81/do_an_be1/index.php');
+	header('location: http://localhost:81/do_an_be1/login/');
 }
 ?>
 <!DOCTYPE html>
@@ -27,6 +27,7 @@ if (!isset($_SESSION['username'])) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/listNews.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
@@ -58,11 +59,10 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
-	<?php echo Navbar::createNavbar() ?>
-
+	<?php echo Navbar::createNavbar(false,$_SESSION['username']); ?>
+		
 	<div class="container test">
-		<?php foreach ($newList as $value) { ;?>
-			
+		<?php foreach ($newList as $value) {; ?>
 			<div class="list-items">
 				<div class="item">
 					<div class="row">
@@ -72,7 +72,7 @@ if (!isset($_SESSION['username'])) {
 						<div class="col-md-8">
 							<h3 class="header-title"><a href="/<?php echo BASE_URL ?>/post/?id=<?php echo $value['id'] ?>"><?php echo $value['header_title'] ?></a></h3>
 							<p class="description"><?php echo $value['description'] ?></p>
-							<?php echo Tag::createTag($value['id'])?>
+							<?php echo Tag::createTag($value['id']) ?>
 							<div class="create-at"><?php echo $value['create_at'] ?></div>
 						</div>
 					</div>
@@ -82,12 +82,12 @@ if (!isset($_SESSION['username'])) {
 	</div>
 	<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
-			<?php 
-			$link = '/'.BASE_URL.'/home/?';
-			echo Pagination::createPageLinks($newModel->getTotalRow(), $perPage, $page,$link); ?>
+			<?php
+			$link = '/' . BASE_URL . '/home/?';
+			echo Pagination::createPageLinks($newModel->getTotalRow(), $perPage, $page, $link);
+			?>
 		</ul>
 	</nav>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>

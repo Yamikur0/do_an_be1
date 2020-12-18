@@ -7,11 +7,25 @@ spl_autoload_register(function ($class_name) {
 
 class Navbar
 {
-    public static function createNavbar()
+    public static function createNavbar($user, $username = 'login')
     {
+        if ($user) {
+            $form = '<form action="/' . BASE_URL . '/login/" method="post">
+                <input type="submit" value="Sign up" name="signup" class="dropdown-item">
+                <input type="submit" value="Log in" name="login" class="dropdown-item">
+            </form>';
+        } else {
+            $form = '<form action="/' . BASE_URL . '/login/" method="post">
+                <input type="submit" value="Log out" name="logout" class="dropdown-item">
+            </form>';
+        }
+        
         return '<nav class="navbar navbar-expand-sm navbar-light bg-white">
             <a class="navbar-brand" href="#"><img src="/' . BASE_URL . '/public/img/logo/codelearn-logo.png" alt=""></a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
@@ -27,18 +41,14 @@ class Navbar
                 </form>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                        <div class="nav-link dropdown-toggle" href="#" id="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $username . '</div>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <form action="/'.BASE_URL.'/index.php" method="post">
-                                <input type="submit" value="Sign up" name="login">
-                            </form>
-                            
-                            <a class="dropdown-item" href="/'.BASE_URL.'/index.php">Logout</a>
+                            ' . $form . '
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>';
     }
-   // <a class="dropdown-item" href="/'.BASE_URL.'/index.php">Sign up</a>
+    // <a class="dropdown-item" href="/'.BASE_URL.'/index.php">Sign up</a>
 }

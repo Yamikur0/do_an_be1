@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 08, 2020 at 01:21 AM
+-- Generation Time: Dec 18, 2020 at 12:25 AM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -33,24 +33,26 @@ DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
-  `create_at` date NOT NULL,
+  `create_at` timestamp NOT NULL,
   `like` int NOT NULL DEFAULT '0',
   `news_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `description`, `create_at`, `like`, `news_id`, `user_id`) VALUES
-(43, '123', '2020-12-07', 0, 31, 1),
-(42, 'teststese', '2020-12-07', 0, 31, 1),
-(41, 'test', '2020-12-07', 0, 31, 1),
-(40, 'test', '2020-12-07', 0, 31, 1),
-(32, 'nguyen tien', '2020-12-07', 0, 10, 1),
-(31, 'nguyen tien', '2020-12-07', 0, 10, 1);
+(1, 'I love Uyên', '2020-12-14 15:15:22', 0, 8, 4),
+(2, 'uyen', '2020-12-14 15:38:33', 0, 8, 4),
+(3, 'asf', '2020-12-14 15:41:22', 0, 8, 4),
+(4, 'asdf', '2020-12-14 15:41:38', 0, 8, 4),
+(5, '123', '2020-12-14 15:42:28', 0, 8, 4),
+(6, 'uyen cute\n', '2020-12-14 15:49:21', 0, 8, 4),
+(7, 'test\n', '2020-12-15 07:41:38', 0, 8, 4),
+(8, 'adfasd', '2020-12-17 09:21:18', 2, 8, 4);
 
 -- --------------------------------------------------------
 
@@ -64,6 +66,14 @@ CREATE TABLE IF NOT EXISTS `like_table` (
   `user_id` int NOT NULL,
   PRIMARY KEY (`comment_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `like_table`
+--
+
+INSERT INTO `like_table` (`comment_id`, `user_id`) VALUES
+(8, 2),
+(8, 4);
 
 -- --------------------------------------------------------
 
@@ -999,14 +1009,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `password`) VALUES
-(1, 'tien', 'nguyen');
+(4, 'baobaote00', '$2y$10$kSImwLHVGXxWAB./zhm0luHUCooGk0Rh0Awxwxm3gFaZINWIiTv.a'),
+(2, 'baobaote', '$2y$10$dl1j2HfgAxtHEeOsh5B3..nZxJP7APx/yl4UOkxf55N/vDHOQ1pUm'),
+(6, 'baobaote11', '$2y$10$cQKlaqlN1t7E9NTDIv9eeuahHkN2joezPQYHa/RFg52gbWwS2OwtK');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

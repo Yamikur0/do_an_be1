@@ -89,3 +89,7 @@ body{
 .test{
     margin-top: 100px;
 }
+
+.dropdown-menu{
+    left: -100px;
+}
