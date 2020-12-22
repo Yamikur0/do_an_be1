@@ -28,6 +28,7 @@ if (!isset($_SESSION['username'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/listNews.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
@@ -55,12 +56,29 @@ if (!isset($_SESSION['username'])) {
 			font-size: 16px;
 			line-height: 22px;
 		}
+		.result-search {
+            padding: 10px;
+            position: fixed;
+            right: 20px;
+            z-index: 100;
+            top: 66px;
+            width: 500px;
+            box-shadow: 0 1px 4px 0 rgb(0, 0, 0 , 26%);
+            background: #fff;
+            transition: all 1s;
+        }
+
+        .search-group{
+            padding-bottom: 10px;
+        }
 	</style>
 </head>
 
 <body>
 	<?php echo Navbar::createNavbar(false,$_SESSION['username']); ?>
 		
+	<div class="result-search"></div>
+
 	<div class="container test">
 		<?php foreach ($newList as $value) {; ?>
 			<div class="list-items">
@@ -88,6 +106,7 @@ if (!isset($_SESSION['username'])) {
 			?>
 		</ul>
 	</nav>
+	<script src="/<?php echo BASE_URL?>/public/js/search.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>

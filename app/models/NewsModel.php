@@ -104,4 +104,13 @@ class NewsModel extends Db
         $sql->bind_param('i', $commentId);
         return parent::select($sql)[0]['like'];
     }
+    //search 
+    public function searchNewsBySameTag($tag)
+    {
+        $key = "%{$tag}%";
+        $sql = parent::$connection->prepare("SELECT * FROM `news` JOIN news_tags ON news_tags.new_id = news.id JOIN tags ON news_tags.tag_id = tags.id WHERE tags.name LIKE ? GROUP BY news.header_title LIMIT 10
+        ");
+        $sql->bind_param('s', $key);
+        return parent::select($sql);
+    }
 }

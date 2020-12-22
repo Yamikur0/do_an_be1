@@ -36,12 +36,13 @@ class Navbar
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <div class="nav-link dropdown-toggle" href="#" id="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $username . '</div>
+                        <div class="nav-link dropdown-toggle test-click" href="#" id="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . $username . '</div>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
                             ' . $form . '
                         </div>

@@ -40,16 +40,34 @@ $comments = $newModel->getAllComment($id);
         .main-image {
             margin-top: 40px;
         }
+
+        .result-search {
+            padding: 10px;
+            position: fixed;
+            right: 20px;
+            z-index: 100;
+            top: 66px;
+            width: 500px;
+            box-shadow: 0 1px 4px 0 rgb(0, 0, 0 , 26%);
+            background: #fff;
+            transition: all 1s;
+        }
+
+        .search-group{
+            padding-bottom: 10px;
+        }
+       
     </style>
 </head>
 
 <body>
     <?php echo Navbar::createNavbar($user, $username) ?>
+    <div class="result-search"></div>
     <input type="hidden" id="user_id" value="<?php echo $_SESSION['userId'] ?>">
     <input type="hidden" id="post_id" value="<?php echo $id ?>">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="row main-content">
                     <div class="col-md-12">
                         <div class="main-image">
@@ -63,40 +81,6 @@ $comments = $newModel->getAllComment($id);
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                    <!-- Indicators -->
-                    <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <li data-target="#demo" data-slide-to="2"></li>
-                    </ul>
-
-                    <!-- The slideshow -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/do_an_be1/public/img/to-stay-motivated-when-learning-to-code-63725540369.4944.jpg" class="img-fluid" alt="Los Angeles">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/do_an_be1/public/img/quick-interview-python-p1-63739029184.5009.jpg"class="img-fluid" alt="Chicago">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/do_an_be1/public/img/xu-ly-va-cham-trong-game-voi-pygame-63740756684.5608.jpg" class="img-fluid" alt="New York">
-                        </div>
-                    </div>
-
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-
                 </div>
             </div>
         </div>
@@ -134,7 +118,7 @@ $comments = $newModel->getAllComment($id);
                                     <li><i class="fa fa-thumbs-up"></i><span comment_id="<?php echo $value['id'] ?>"><?php echo $value['like'] ?></span></li>
                                 </ul>
                                 <ul class="list-unstyled list-inline media-detail pull-right">
-                                    <li class=""><span style="color: #007bff;user-select: none;" class="like" commentId="<?php echo $value['id']?>">Like</span></li>
+                                    <li class=""><span style="color: #007bff;user-select: none;" class="like" commentId="<?php echo $value['id'] ?>">Like</span></li>
                                     <li class=""><span style="color: #007bff;user-select: none;">Reply</span></li>
                                 </ul>
                             </div>
@@ -167,6 +151,7 @@ $comments = $newModel->getAllComment($id);
     <?php if ($user) {
         echo '<script>$("#comments").hide();</script>';
     } ?>
+    <script src="/<?php echo BASE_URL ?>/public/js/search.js"></script>
     <script src="/<?php echo BASE_URL ?>/public/js/comment.js"></script>
     <script src="/<?php echo BASE_URL ?>/public/js/prism.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
