@@ -16,6 +16,7 @@ if (isset($_GET['page'])) {
 session_start();
 $newModel = new NewsModel();
 $newList = $newModel->getNewsByPage($page, $perPage);
+$top5 = $newModel->getTop5();
 if (!isset($_SESSION['username'])) {
 	header('location: http://localhost:81/do_an_be1/login/');
 }
@@ -33,8 +34,8 @@ if (!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/listNews.css">
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
 	<style>
-		.bg-white {
-			box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
+		.carousel-caption {
+			font-weight: 1000;
 		}
 
 		.header-title a,
@@ -56,30 +57,87 @@ if (!isset($_SESSION['username'])) {
 			font-size: 16px;
 			line-height: 22px;
 		}
-		.result-search {
-            padding: 10px;
-            position: fixed;
-            right: 20px;
-            z-index: 100;
-            top: 66px;
-            width: 500px;
-            box-shadow: 0 1px 4px 0 rgb(0, 0, 0 , 26%);
-            background: #fff;
-            transition: all 1s;
-        }
 
-        .search-group{
-            padding-bottom: 10px;
-        }
+		.result-search {
+			padding: 10px;
+			position: fixed;
+			right: 20px;
+			z-index: 100;
+			top: 66px;
+			width: 500px;
+			box-shadow: 0 1px 4px 0 rgb(0, 0, 0, 26%);
+			background: #fff;
+			transition: all 1s;
+		}
+
+		.search-group {
+			padding-bottom: 10px;
+		}
+
+		.img {
+			height: 600px;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		#hot-post {
+			margin-top: 70px;
+		}
 	</style>
 </head>
 
 <body>
-	<?php echo Navbar::createNavbar(false,$_SESSION['username']); ?>
-		
+	<?php echo Navbar::createNavbar(false, $_SESSION['username']); ?>
+
 	<div class="result-search"></div>
 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 id="hot-post">Hot Post</h4>
+				<div id="demo" class="carousel slide" data-ride="carousel">
+					<ul class="carousel-indicators">
+						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						<li data-target="#demo" data-slide-to="1"></li>
+						<li data-target="#demo" data-slide-to="2"></li>
+						<li data-target="#demo" data-slide-to="3"></li>
+						<li data-target="#demo" data-slide-to="4"></li>
+					</ul>
+
+					<div class="carousel-inner">
+						<?php for ($i = 0; $i < count($top5); $i++) { ?>
+							<?php if ($i == 0) { ?>
+								<div class="carousel-item img active" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
+									<div class="carousel-caption d-none d-md-block" style="color: #000;">
+										<p><?php echo $top5[$i]['header_title'] ?></p>
+									</div>
+								</div>
+							<?php } else { ?>
+								<div class="carousel-item img" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
+									<div class="carousel-caption d-none d-md-block" style="color: #000;">
+										<p><?php echo $top5[$i]['header_title'] ?></p>
+									</div>
+								</div>
+							<?php } ?>
+						<?php } ?>
+					</div>
+
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="container test">
+		<h4 id="hot-post">New Post</h4>
 		<?php foreach ($newList as $value) {; ?>
 			<div class="list-items">
 				<div class="item">
@@ -106,7 +164,7 @@ if (!isset($_SESSION['username'])) {
 			?>
 		</ul>
 	</nav>
-	<script src="/<?php echo BASE_URL?>/public/js/search.js"></script>
+	<script src="/<?php echo BASE_URL ?>/public/js/search.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>

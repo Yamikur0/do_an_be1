@@ -12,7 +12,7 @@ $('#search').on('keypress', function(e) {
             let searchGroups = [];
             
             for (let i = 0; i < response.title.length; i++) {
-                searchGroups.push(searchGroup(response.title[i],response.tag[i]));
+                searchGroups.push(searchGroup(response.title[i],response.tag[i],response.id[i]));
             }
 
             searchGroups.forEach(e => {
@@ -31,10 +31,10 @@ $('.container').on('click',function (e) {
 $('.result-search').on('focus',function (e) {  
     $(this).show();
 })
-function searchGroup(title,tagName) {
+function searchGroup(title,tagName,id) {
     return '<div class="search-group">'+
                 '<div class="row">'+
-                    '<div class="col-md-8">'+title+'</div>'+
+                    '<div class="col-md-8"><a href="/do_an_be1/post/?id='+id+'">'+title+'</a></div>'+
                     '<div class="col-md-4 tag-list">'+
                         '<div class="tag-scroll col-md-12">'+
                             '<span><a href="/do_an_be1/tag/?tag='+tagName+'">'+tagName+'</a></span>'+

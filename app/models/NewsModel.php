@@ -18,7 +18,7 @@ class NewsModel extends Db
     public function getNewsByPage($page, $perPage)
     {
         $start = ($page - 1) * $perPage;
-        $sql = parent::$connection->prepare("SELECT * FROM news LIMIT ?,?");
+        $sql = parent::$connection->prepare("SELECT * FROM news ORDER BY create_at DESC LIMIT ?,?");
         $sql->bind_param('ii', $start, $perPage);
         return parent::select($sql);
     }
@@ -108,9 +108,13 @@ class NewsModel extends Db
     public function searchNewsBySameTag($tag)
     {
         $key = "%{$tag}%";
-        $sql = parent::$connection->prepare("SELECT * FROM `news` JOIN news_tags ON news_tags.new_id = news.id JOIN tags ON news_tags.tag_id = tags.id WHERE tags.name LIKE ? GROUP BY news.header_title LIMIT 10
-        ");
+        $sql = parent::$connection->prepare("SELECT news.header_title,tags.name,news.id FROM `news` JOIN news_tags ON news_tags.new_id = news.id JOIN tags ON news_tags.tag_id = tags.id WHERE tags.name LIKE ? GROUP BY news.header_title LIMIT 10");
         $sql->bind_param('s', $key);
+        return parent::select($sql);
+    }
+    public function getTop5()
+    {
+        $sql = parent::$connection->prepare("SELECT new1.id,new1.img,new1.header_title FROM (SELECT * FROM news ORDER BY create_at DESC LIMIT 10) as new1 ORDER BY (SELECT COUNT(id) FROM `comments` as comment1 WHERE comment1.news_id = new1.id) DESC LIMIT 5");
         return parent::select($sql);
     }
 }

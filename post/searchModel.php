@@ -33,5 +33,15 @@ if (isset($_POST['search_check'])) {
                 }
             }    
         ?>
+    ],
+    "id": [
+        <?php
+            for ($i=0; $i < count($post); $i++) { 
+                echo "\"".$post[$i]['id']."\"";
+                if ($i < count($post)-1) {
+                    echo ",\n";
+                }
+            }    
+        ?>
     ]
 }

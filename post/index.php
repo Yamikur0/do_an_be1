@@ -119,7 +119,6 @@ $comments = $newModel->getAllComment($id);
                                 </ul>
                                 <ul class="list-unstyled list-inline media-detail pull-right">
                                     <li class=""><span style="color: #007bff;user-select: none;" class="like" commentId="<?php echo $value['id'] ?>">Like</span></li>
-                                    <li class=""><span style="color: #007bff;user-select: none;">Reply</span></li>
                                 </ul>
                             </div>
                         </div>
