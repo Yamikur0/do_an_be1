@@ -117,4 +117,12 @@ class NewsModel extends Db
         $sql = parent::$connection->prepare("SELECT new1.id,new1.img,new1.header_title FROM (SELECT * FROM news ORDER BY create_at DESC LIMIT 10) as new1 ORDER BY (SELECT COUNT(id) FROM `comments` as comment1 WHERE comment1.news_id = new1.id) DESC LIMIT 5");
         return parent::select($sql);
     }
+
+    //Increase View
+    public function increaseView($id)
+    {
+        $sql=parent::$connection->prepare("UPDATE news SET views = views + 1 WHERE news.id = ?");
+        $sql->bind_param('i',$id);
+        return $sql->execute();
+    }
 }

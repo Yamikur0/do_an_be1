@@ -35,7 +35,18 @@ if (!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
 	<style>
 		.carousel-caption {
-			font-weight: 1000;
+  			background-color: rgba(106, 90, 205, 0.9);
+  			color: white;
+  			font-weight: bold;
+  			border: 3px solid #f1f1f1;
+  			top: 50%;
+  			left: 50%;
+  			transform: translate(-50%, -50%);
+  			z-index: 2;
+  			width: 70%;
+  			text-align: center;
+			font-size: 50px;
+			padding: 70px 0;
 		}
 
 		.header-title a,
@@ -79,10 +90,19 @@ if (!isset($_SESSION['username'])) {
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
+			
 		}
 
 		#hot-post {
 			margin-top: 70px;
+		}
+
+		.carousel-control-prev{
+			width: 10%;
+		}
+
+		.carousel-control-next{
+			width: 10%;
 		}
 	</style>
 </head>
@@ -109,13 +129,16 @@ if (!isset($_SESSION['username'])) {
 						<?php for ($i = 0; $i < count($top5); $i++) { ?>
 							<?php if ($i == 0) { ?>
 								<div class="carousel-item img active" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
-									<div class="carousel-caption d-none d-md-block" style="color: #000;">
+								
+									<div class="carousel-caption d-none d-md-block">
 										<p><?php echo $top5[$i]['header_title'] ?></p>
 									</div>
 								</div>
+								
 							<?php } else { ?>
+								
 								<div class="carousel-item img" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
-									<div class="carousel-caption d-none d-md-block" style="color: #000;">
+									<div class="carousel-caption d-none d-md-block">
 										<p><?php echo $top5[$i]['header_title'] ?></p>
 									</div>
 								</div>
@@ -150,6 +173,7 @@ if (!isset($_SESSION['username'])) {
 							<p class="description"><?php echo $value['description'] ?></p>
 							<?php echo Tag::createTag($value['id']) ?>
 							<div class="create-at"><?php echo $value['create_at'] ?></div>
+							<div class="view">Views: <?php echo $value['views'] ?></div>
 						</div>
 					</div>
 				</div>

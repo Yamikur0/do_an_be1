@@ -10,6 +10,7 @@ spl_autoload_register(function ($class_name) {
 $newModel = new NewsModel();
 
 $id = isset($_GET['id']) ? $_GET['id'] : 7;
+var_dump($id);
 $new = $newModel->getNewsById($id);
 session_start();
 if (isset($_SESSION['username'])) {
@@ -20,6 +21,12 @@ if (isset($_SESSION['username'])) {
     $username = 'login';
 }
 $comments = $newModel->getAllComment($id);
+
+$view = 'view'.$id;
+if (!isset($_SESSION[$view])) {
+    $_SESSION[$view] = 1;
+    $newModel->increaseView($id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
