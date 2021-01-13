@@ -70,7 +70,9 @@ if (!isset($_SESSION[$view])) {
 <body>
     <?php echo Navbar::createNavbar($user, $username) ?>
     <div class="result-search"></div>
-    <input type="hidden" id="user_id" value="<?php echo $_SESSION['userId'] ?>">
+    <?php if(isset($_SESSION['userId'])){?>
+        <input type="hidden" id="user_id" value="<?php echo $_SESSION['userId'] ?>">
+    <?php }?>
     <input type="hidden" id="post_id" value="<?php echo $id ?>">
     <div class="container">
         <div class="row">

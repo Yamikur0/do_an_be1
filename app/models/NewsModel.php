@@ -61,9 +61,8 @@ class NewsModel extends Db
     public function createComment($message, $newsId, $userId)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $date = date('Y-m-d H:i:s');
-        $sql = parent::$connection->prepare("INSERT INTO `comments` ( `description`, `create_at`, `news_id`, `user_id`) VALUES ( ?, ?, ?, ?)");
-        $sql->bind_param('ssii', $message, $date, $newsId, $userId);
+        $sql = parent::$connection->prepare("INSERT INTO `comments` ( `description`, `create_at`, `news_id`, `user_id`) VALUES ( ?,NOW(), ?, ? )");
+        $sql->bind_param('sii', $message, $newsId, $userId);
         return $sql->execute();
     }
     public function getAllComment($id)

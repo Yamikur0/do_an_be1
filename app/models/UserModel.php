@@ -23,6 +23,10 @@ class UserModel extends Db
     {
         $sql = parent::$connection->prepare("SELECT users.password FROM `users` WHERE `name` = ?");
         $sql->bind_param('s', $username);
+        $result = parent::select($sql);
+        if (!isset($result[0]['password'])) {
+           return false;
+        }
         return password_verify($password,parent::select($sql)[0]['password']);
     }
     public function createUser($username,$password)
