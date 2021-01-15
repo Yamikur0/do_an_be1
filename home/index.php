@@ -35,16 +35,16 @@ if (!isset($_SESSION['username'])) {
 	<link rel="stylesheet" href="/<?php echo BASE_URL ?>/public/css/style.css">
 	<style>
 		.carousel-caption {
-  			background-color: rgba(106, 90, 205, 0.9);
-  			color: white;
-  			font-weight: bold;
-  			border: 3px solid #f1f1f1;
-  			top: 50%;
-  			left: 50%;
-  			transform: translate(-50%, -50%);
-  			z-index: 2;
-  			width: 70%;
-  			text-align: center;
+			background-color: rgba(106, 90, 205, 0.9);
+			color: white;
+			font-weight: bold;
+			border: 3px solid #f1f1f1;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			width: 70%;
+			text-align: center;
 			font-size: 50px;
 			padding: 70px 0;
 		}
@@ -90,19 +90,44 @@ if (!isset($_SESSION['username'])) {
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
-			
+
 		}
 
 		#hot-post {
 			margin-top: 70px;
+			font-size: 50px;
+			line-height: 120px;
+			font-family: "Sacramento", cursive;
+			text-align: center;
+			animation: blink 8s infinite;
 		}
 
-		.carousel-control-prev{
+		.carousel-control-prev {
 			width: 10%;
 		}
 
-		.carousel-control-next{
+		.carousel-control-next {
 			width: 10%;
+		}
+
+		@keyframes blink {
+			20%,
+			24%,
+			55% {
+				color: #111;
+				text-shadow: none;
+			}
+			0%,
+			19%,
+			21%,
+			23%,
+			25%,
+			54%,
+			56%,
+			100% {
+				text-shadow: 0 0 5px #2b99d6, 0 0 15px #2b99d6, 0 0 20px #2b99d6, 0 0 40px #2b99d6, 0 0 60px #2b99d6, 0 0 10px #2b99d6, 0 0 98px #2b99d6;
+				color: #fff;
+			}
 		}
 	</style>
 </head>
@@ -115,8 +140,8 @@ if (!isset($_SESSION['username'])) {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h4 id="hot-post">Hot Post</h4>
-				<div id="demo" class="carousel slide" data-ride="carousel">
+				<h1 id="hot-post">Hot Post</h1>
+				<div id="demo" class="carousel slide" data-ride="carousel" data-interval="3000">
 					<ul class="carousel-indicators">
 						<li data-target="#demo" data-slide-to="0" class="active"></li>
 						<li data-target="#demo" data-slide-to="1"></li>
@@ -129,14 +154,14 @@ if (!isset($_SESSION['username'])) {
 						<?php for ($i = 0; $i < count($top5); $i++) { ?>
 							<?php if ($i == 0) { ?>
 								<div class="carousel-item img active" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
-								
+
 									<div class="carousel-caption d-none d-md-block">
 										<p><?php echo $top5[$i]['header_title'] ?></p>
 									</div>
 								</div>
-								
+
 							<?php } else { ?>
-								
+
 								<div class="carousel-item img" style="background-image: url(<?php echo '/' . BASE_URL . '/public/img/' . $top5[$i]['img'] ?>);">
 									<div class="carousel-caption d-none d-md-block">
 										<p><?php echo $top5[$i]['header_title'] ?></p>
@@ -160,7 +185,7 @@ if (!isset($_SESSION['username'])) {
 	</div>
 
 	<div class="container test">
-		<h4 id="hot-post">New Post</h4>
+		<h1 id="hot-post">New Post</h1>
 		<?php foreach ($newList as $value) {; ?>
 			<div class="list-items">
 				<div class="item">
